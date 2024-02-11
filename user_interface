@@ -1,3 +1,159 @@
-## user interface - sprint 2 feb 11 2024
+<!-- user interface - sprint 2 feb 11 2024 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Surveys</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .survey {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .option {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Take Surveys</h1>
+        <div class="survey">
+            <h2>Select a Survey Type:</h2>
+            <select id="surveyType">
+                <option value="1">Sports</option>
+                <option value="2">Movies</option>
+                <option value="3">Music</option>
+            </select>
+            <div class="question" id="sportsQuestions" style="display:none;">
+                <p>Question 1: What is your favorite sport?</p>
+                <select class="options">
+                    <option value="Football">Football</option>
+                    <option value="Basketball">Basketball</option>
+                    <option value="Tennis">Tennis</option>
+                    <option value="Soccer">Soccer</option>
+                    <option value="Baseball">Baseball</option>
+                </select>
+                <p>Question 2: Who is your favorite athlete?</p>
+                <select class="options">
+                    <option value="LeBron James">LeBron James</option>
+                    <option value="Serena Williams">Serena Williams</option>
+                    <option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+                    <option value="Lionel Messi">Lionel Messi</option>
+                    <option value="Tom Brady">Tom Brady</option>
+                </select>
+                <p>Question 3: Which sports event do you enjoy the most?</p>
+                <select class="options">
+                    <option value="Super Bowl">Super Bowl</option>
+                    <option value="FIFA World Cup">FIFA World Cup</option>
+                    <option value="Olympic Games">Olympic Games</option>
+                    <option value="Wimbledon">Wimbledon</option>
+                    <option value="NBA Finals">NBA Finals</option>
+                </select>
+            </div>
+            <div class="question" id="moviesQuestions" style="display:none;">
+                <p>Question 1: What is your favorite movie genre?</p>
+                <select class="options">
+                    <option value="Action">Action</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                </select>
+                <p>Question 2: Who is your favorite actor?</p>
+                <select class="options">
+                    <option value="Tom Hanks">Tom Hanks</option>
+                    <option value="Leonardo DiCaprio">Leonardo DiCaprio</option>
+                    <option value="Meryl Streep">Meryl Streep</option>
+                    <option value="Brad Pitt">Brad Pitt</option>
+                    <option value="Jennifer Lawrence">Jennifer Lawrence</option>
+                </select>
+                <p>Question 3: Which is your favorite movie of all time?</p>
+                <select class="options">
+                    <option value="The Shawshank Redemption">The Shawshank Redemption</option>
+                    <option value="The Godfather">The Godfather</option>
+                    <option value="Pulp Fiction">Pulp Fiction</option>
+                    <option value="The Dark Knight">The Dark Knight</option>
+                    <option value="Forrest Gump">Forrest Gump</option>
+                </select>
+            </div>
+            <div class="question" id="musicQuestions" style="display:none;">
+                <p>Question 1: What is your favorite music genre?</p>
+                <select class="options">
+                    <option value="Pop">Pop</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Hip Hop">Hip Hop</option>
+                    <option value="Country">Country</option>
+                    <option value="Electronic">Electronic</option>
+                </select>
+                <p>Question 2: Who is your favorite musician/band?</p>
+                <select class="options">
+                    <option value="Taylor Swift">Taylor Swift</option>
+                    <option value="The Beatles">The Beatles</option>
+                    <option value="Eminem">Eminem</option>
+                    <option value="Beyoncé">Beyoncé</option>
+                    <option value="Coldplay">Coldplay</option>
+                </select>
+                <p>Question 3: Which music festival would you like to attend?</p>
+                <select class="options">
+                    <option value="Coachella">Coachella</option>
+                    <option value="Glastonbury">Glastonbury</option>
+                    <option value="Tomorrowland">Tomorrowland</option>
+                    <option value="Lollapalooza">Lollapalooza</option>
+                    <option value="Electric Daisy Carnival (EDC)">Electric Daisy Carnival (EDC)</option>
+                </select>
+            </div>
+            <button class="button">Submit</button>
+        </div>
+    </div>
 
+    <script>
+        document.getElementById('surveyType').addEventListener('change', function() {
+            var surveyType = this.value;
+            var questionDivs = document.querySelectorAll('.question');
+            questionDivs.forEach(function(questionDiv) {
+                questionDiv.style.display = 'none';
+            });
+            document.getElementById(surveyType === '1' ? 'sportsQuestions' : surveyType === '2' ? 'moviesQuestions' : 'musicQuestions').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
 ## daniel
