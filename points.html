@@ -45,19 +45,30 @@
     <div class="container">
         <h1>My Points</h1>
         <div class="points">
+            <h2 id="usernameDisplay">Username: Loading...</h2> <!-- Added element to display username -->
             <h2>Your Current Points:</h2>
             <p id="points"></p>
         </div>
         <a href="/" class="button">Back to Home</a>
     </div>
+    
 
     <script>
-        fetch('/getPoints')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('points').textContent = `You have ${data.points} points.`;
-            })
-            .catch(error => console.error('Error fetching points:', error));
+        
+
+        function displayUserInfo() {
+    const username = localStorage.getItem('currentUsername') || 'Guest';
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = users.find(user => user.username === username);
+
+    const userPoints = user ? user.points : 0; // Use points from the user object
+
+    document.getElementById('usernameDisplay').textContent = `Username: ${username}`;
+    document.getElementById('points').textContent = `You have ${userPoints} points.`;
+}
+
+displayUserInfo();
+
     </script>
 </body>
 </html>
