@@ -45,15 +45,43 @@
         }
     </style>
     
+    <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent the form from submitting in the traditional way
+    
+            var username = document.getElementById('loginUsername').value; // Assuming your login username input has an ID 'loginUsername'
+            var password = document.getElementById('loginPassword').value; // Assuming your login password input has an ID 'loginPassword'
+    
+            // Retrieve the users from local storage
+            var users = JSON.parse(localStorage.getItem('users') || '[]');
+    
+            // Check if the username and password match any user
+            var userFound = users.some(function(user) {
+                return user.username === username && user.password === password;
+            });
+    
+            if (userFound) {
+                // Set the current user's username in localStorage
+                localStorage.setItem('currentUsername', username);
+                alert("Login successful!");
+                window.location.href = "points.html"; // Redirect to points page or another page as needed
+            } else {
+                alert("Login failed: Incorrect username or password.");
+            }
+        }
+    </script>
+    
 </head>
 <body>
     <div class="container">
         <h1>Login</h1>
-        <form action="/login" method="post">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
+        <form name="loginForm" onsubmit="handleLogin(event)">
+            <input type="text" id="loginUsername" name="username" placeholder="Username" required>
+            <input type="password" id="loginPassword" name="password" placeholder="Password" required>
             <input type="submit" value="Login">
         </form>
+        
+        
     </div>
 </body>
 </html>
