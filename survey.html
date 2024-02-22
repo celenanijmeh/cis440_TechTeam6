@@ -59,6 +59,7 @@
         <div class="survey">
             <h2>Select a Survey Type:</h2>
             <select id="surveyType">
+                <option value="0">Select One</option>
                 <option value="1">Sports</option>
                 <option value="2">Movies</option>
                 <option value="3">Music</option>
@@ -141,20 +142,65 @@
                     <option value="Electric Daisy Carnival (EDC)">Electric Daisy Carnival (EDC)</option>
                 </select>
             </div>
-            <button class="button">Submit</button>
+            <button id="submitSurveyBtn" class="button">Submit</button>
+
+            
         </div>
     </div>
 
     <script>
-        document.getElementById('surveyType').addEventListener('change', function() {
-            var surveyType = this.value;
-            var questionDivs = document.querySelectorAll('.question');
-            questionDivs.forEach(function(questionDiv) {
-                questionDiv.style.display = 'none';
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('surveyType').addEventListener('change', function() {
+                document.getElementById('sportsQuestions').style.display = 'none';
+                document.getElementById('moviesQuestions').style.display = 'none';
+                document.getElementById('musicQuestions').style.display = 'none';
+    
+                if (this.value === '1') {
+                    document.getElementById('sportsQuestions').style.display = 'block';
+                } else if (this.value === '2') {
+                    document.getElementById('moviesQuestions').style.display = 'block';
+                } else if (this.value === '3') {
+                    document.getElementById('musicQuestions').style.display = 'block';
+                }
             });
-            document.getElementById(surveyType === '1' ? 'sportsQuestions' : surveyType === '2' ? 'moviesQuestions' : 'musicQuestions').style.display = 'block';
+    
+            // Ensure the submit button event listener is set up within the DOMContentLoaded callback
+            document.getElementById('submitSurveyBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+                submitSurvey();
+            });
         });
+    
+        function submitSurvey() {
+    // Retrieve the current logged-in username
+    let currentUsername = localStorage.getItem('currentUsername');
+
+    // Retrieve the users array from localStorage
+    let users = JSON.parse(localStorage.getItem('users') || '[]');
+
+    // Find the index of the currently logged-in user in the users array
+    let userIndex = users.findIndex(user => user.username === currentUsername);
+
+    // Check if the user was found
+    if (userIndex !== -1) {
+        // Update the points for the specific user
+        users[userIndex].points = (users[userIndex].points || 0) + 1; // Ensure the points property exists and increment
+
+        // Save the updated users array back to localStorage
+        localStorage.setItem('users', JSON.stringify(users));
+
+        // Optionally, you can also update a separate 'userPoints' item if needed elsewhere
+        localStorage.setItem('userPoints', users[userIndex].points.toString());
+
+        alert(`Survey submitted! You have earned 1 point. Total points: ${users[userIndex].points}`);
+    } else {
+        // Handle the case where the user is not found or not logged in
+        alert("You need to be logged in to submit surveys and earn points.");
+    }
+}
+
     </script>
+    
+    <a href="index.html" class="button">Go to Main Page</a>
 </body>
 </html>
-## daniel
